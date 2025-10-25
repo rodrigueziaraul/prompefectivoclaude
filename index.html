@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Prompts Efectivo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    label, select, textarea, button {
+      display: block;
+      margin: 15px 0;
+      width: 100%;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #6B4FBB;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #5a3f9f;
+    }
+  </style>
+</head>
+<body>
+  <h1>Generador de Prompt Efectivo</h1>
+
+  <label for="Introducción a generar prompt efectivo">Un prompt efectivo es la clave para obtener respuestas precisas, relevantes y útiles de cualquier modelo de inteligencia artificial. La estructura correcta de un prompt puede marcar la diferencia entre una respuesta genérica y una solución perfectamente adaptada a tus necesidades.</label>
+ 
+ <div class="element">
+    <h4>1. 🎯Contexto</h4>
+    <p>Proporciona información de fondo que ayude a la IA a entender la situación completa. Define el escenario, el propósito y cualquier información relevante que enmarque tu solicitud.</p>
+    <div class="example">
+        <strong>Ejemplo:</strong> ""Soy profesor de matemáticas de secundaria y necesito explicar el teorema de Pitágoras a estudiantes de 13-14 años que tienen dificultades con conceptos abstractos."."    </div>
+    <textarea id="contexto" rows="3" placeholder="Ingresa aquí el contexto."></textarea>
+    
+ </div>
+ 
+ 
+ 
+ 
+  <div class="element">
+    <h4>2. 🎭 Rol o Perspectiva</h4>
+    <p>Define el papel que quieres que asuma la IA. Esto influye en el tono, el estilo y el enfoque de la respuesta.</p>
+    <div class="example">
+        <strong>Ejemplo:</strong> "Actúa como un experto en marketing digital con 10 años de experiencia en estrategias para redes sociales."
+    </div>
+</div>
+  <textarea id="rol" rows="3" placeholder="Ingresa aquí el rol o la perspectiva."></textarea>
+  <div class="element">
+    <h4>3. 🎯 Tarea Específica</h4>
+    <p>Describe claramente qué quieres que haga la IA. Sé específico y directo sobre la acción esperada.</p>
+    <div class="example">
+        <strong>Ejemplo:</strong> "Crea un plan de contenido para Instagram de 30 días enfocado en promocionar productos de belleza orgánicos."
+    </div>
+    <textarea id="tarea" rows="3" placeholder="Ingresa la tarea específica."></textarea>
+    
+ </div>
+  <div class="element">
+    <h4>4. 🎯Datos de entrada</h4>
+    <p>Proporciona información concreta, ejemplos, datos o parámetros que la IA deba considerar para generar la respuesta.</p>
+    <div class="example">
+    <strong>Ejemplo:</strong>"Público objetivo: mujeres de 25-40 años, presupuesto: $500/mes, productos: cremas faciales, serums y mascarillas."</div>
+    <textarea id="datosentrada" rows="3" placeholder="Ingrese los datos de entrada."></textarea>
+    
+ </div>
+ 
+<div class="element">
+    <h4>5. 🎯Formato de salida </h4>
+    <p>Especifica cómo quieres recibir la información: lista, tabla, párrafo, código, JSON, HTML, etc.</p>
+    <div class="example">
+    <strong>Ejemplo:</strong>"Presenta el resultado en formato de tabla con columnas: Semana, Tema, Tipo de contenido, Objetivo."</div>
+    <textarea id="formatosalida" rows="3" placeholder="Ingrese el formato de salida."></textarea>
+    
+</div>
+
+<div class="element">
+    <h4>6. 🎯Restricciones o limitaciones </h4>
+    <p>Define límites como longitud, tono, vocabulario, aspectos a evitar o consideraciones especiales.</p>
+    <div class="example">
+    <strong>Ejemplo:</strong>"Máximo 300 palabras, tono casual pero profesional, evita jerga técnica compleja."</div>
+    <textarea id="restricciones" rows="3" placeholder="Ingrese las restricciones o limitaciones."></textarea>
+    
+</div>
+
+
+<label for="lenguaje">Lenguaje de programación:</label>
+  <select id="lenguaje">
+    <option value="texto">Texto</option>
+    <option value="HTML5">HTML5</option>
+    <option value="Python">Python</option>
+  </select>
+
+  <button onClick="generarPrompt()">Generar y Enviar a Claude</button>
+
+  <label for="tema2">Resultado (Prompt generado):</label>
+  <textarea id="tema2" rows="8" placeholder="Aquí aparecerá el contenido combinado..."></textarea>
+
+  <script>
+    function generarPrompt() {
+      const contexto = document.getElementById('contexto').value.trim();
+      const rol = document.getElementById('rol').value.trim();
+      const tarea = document.getElementById('tarea').value.trim();
+      const datosentrada = document.getElementById('datosentrada').value.trim();
+      const formatosalida = document.getElementById('formatosalida').value.trim();
+	  const restricciones = document.getElementById('restricciones').value.trim();
+      const lenguaje = document.getElementById('lenguaje').value;
+
+      if (!contexto || !rol || !tarea || !datosentrada || !formatosalida || !restricciones) {
+        alert("Por favor, diligencia todas las cajas de texto antes de generar el prompt.");
+        return;
+      }
+
+      // Concatenar todo el contenido en una sola caja
+      const prompt = 
+        "🧠 Contexto: " + contexto + "\n\n" +
+        "📘 Rol: " + rol + "\n\n" +
+        "🌐 Tarea: " + tarea + "\n\n" +
+        "💡 Datos de entrada: " + datosentrada + "\n\n" +
+        "🎯 Formato de salida: " + formatosalida + "\n\n" +
+        "💻 Lenguaje de programación: " + lenguaje + "\n\n" +
+		"   Restricciones: "+ restricciones;
+
+      document.getElementById('tema2').value = prompt;
+
+      // Abrir Claude.ai con el prompt
+      const promptCodificado = encodeURIComponent(prompt);
+      const url = `https://claude.ai/new?q=${promptCodificado}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
